@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { cardIdsToDelete } from "./cards-to-delete.js"
 
 const PIPEFY_API_URL = 'https://api.pipefy.com/graphql';
 const PIPEFY_ACCESS_TOKEN = process.env.PIPEFY_API_TOKEN;
@@ -26,6 +27,8 @@ async function deleteCard(cardId) {
     `;
 
     try {
+        setTimeout(() => Promise.resolve(), 1000)
+
         const response = await axios.post(
             PIPEFY_API_URL,
             { query },
@@ -69,7 +72,6 @@ async function deleteCardsByIds(cardIds) {
 }
 
 // Executar a exclusão com um array de IDs de exemplo
-const cardIdsToDelete = []
 
 deleteCardsByIds(cardIdsToDelete)
     .then(() => console.log('🚀 Exclusão concluída com sucesso!'))
